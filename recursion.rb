@@ -37,3 +37,35 @@ def beer_bottles(n)
 end
 
 beer_bottles(7)
+
+def fibonacci_val(n)
+  return nil unless n.positive?
+  case n
+  when 1
+    return 0
+  when 2 
+    return 1
+  else
+  return fibonacci_val(n-1) + fibonacci_val(n-2)
+  end
+end
+
+
+puts fibonacci_val(0) #nil
+puts fibonacci_val(2) #1
+puts fibonacci_val(7) #8
+puts fibonacci_val(15) #377
+
+def flatten_array(arr, ret_val = [])
+  arr.each do |e|
+    if e.is_a?(Array)
+      flatten_array(e, ret_val)
+    else
+       ret_val << e
+    end
+  end
+  ret_val
+end
+
+puts flatten_array( [[1, [8, 9]], [3, 4]] )
+puts flatten_array( [[1, 2], [3, 4]] )
