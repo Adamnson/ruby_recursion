@@ -71,8 +71,7 @@ end
 # puts flatten_array( [[1, 2], [3, 4]] )
 
 # binding.pry
-
-def to_roman(n)
+def integer_to_roman(number, result = "")
   roman_mapping = {
   1000 => "M",
   900 => "CM",
@@ -88,13 +87,42 @@ def to_roman(n)
   4 => "IV",
   1 => "I"
   }
-  
-  roman_mapping.keys.each do |k|
-    if k == n
-      puts "found #{roman_mapping[k]}"
-    end
+  return result if number == 0
+  roman_mapping.keys.each do |divisor|
+    quotient, modulus = number.divmod(divisor)
+    result << roman_mapping[divisor] * quotient
+    return integer_to_roman( modulus, result) if quotient > 0
   end
-  return
 end
 
-puts to_roman(5)
+# puts integer_to_roman(14)
+
+
+def roman_to_integer(str, result = 0)
+  roman_mapping = {
+  "M" => 1000,
+  "CM" => 900,
+  "D" => 500,
+  "CD" => 400,
+  "C" => 100,
+  "XC" => 90,
+  "L" => 50,
+  "XL" => 40,
+  "X" => 10,
+  "IX" => 9,
+  "V" => 5,
+  "IV" => 4,
+  "I" => 1
+  }
+  return result if str.empty?
+  roman_mapping.keys.each do |roman|
+    if str.start_with?(roman)
+      result += roman_mapping[roman]
+      str = str.slice(roman.length, str.length)
+      return roman_to_integer(str, result)
+    end
+  end
+end
+
+puts roman_to_integer("IV")
+puts roman_to_integer("MCLXCVI")
