@@ -1,18 +1,18 @@
 # implementation of  https://www.codequizzes.com/computer-science/beginner/recursion
-
+require 'pry-byebug'
 def collatz(n, step = 0)
   return step if n.eql?(1)
   (n % 2 == 0) ? collatz(n/2, step + 1) : collatz( 3*n + 1, step + 1)
 end
 
-puts collatz(27) # 111
+# puts collatz(27) # 111
 
 def factorial(n)
   return 1 if n.eql?(1)
   n * factorial(n - 1)
 end
 
-puts factorial(5) # 120
+# puts factorial(5) # 120
 
 # def check_palindrome(s)
 #   if s.length >= 2
@@ -36,7 +36,7 @@ def beer_bottles(n)
   beer_bottles(n-1)
 end
 
-beer_bottles(7)
+# beer_bottles(7)
 
 def fibonacci_val(n)
   return nil unless n.positive?
@@ -51,10 +51,10 @@ def fibonacci_val(n)
 end
 
 
-puts fibonacci_val(0) #nil
-puts fibonacci_val(2) #1
-puts fibonacci_val(7) #8
-puts fibonacci_val(15) #377
+# puts fibonacci_val(0) #nil
+# puts fibonacci_val(2) #1
+# puts fibonacci_val(7) #8
+# puts fibonacci_val(15) #377
 
 def flatten_array(arr, ret_val = [])
   arr.each do |e|
@@ -67,5 +67,34 @@ def flatten_array(arr, ret_val = [])
   ret_val
 end
 
-puts flatten_array( [[1, [8, 9]], [3, 4]] )
-puts flatten_array( [[1, 2], [3, 4]] )
+# puts flatten_array( [[1, [8, 9]], [3, 4]] )
+# puts flatten_array( [[1, 2], [3, 4]] )
+
+# binding.pry
+
+def to_roman(n)
+  roman_mapping = {
+  1000 => "M",
+  900 => "CM",
+  500 => "D",
+  400 => "CD",
+  100 => "C",
+  90 => "XC",
+  50 => "L",
+  40 => "XL",
+  10 => "X",
+  9 => "IX",
+  5 => "V",
+  4 => "IV",
+  1 => "I"
+  }
+  
+  roman_mapping.keys.each do |k|
+    if k == n
+      puts "found #{roman_mapping[k]}"
+    end
+  end
+  return
+end
+
+puts to_roman(5)
